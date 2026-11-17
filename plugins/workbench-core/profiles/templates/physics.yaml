@@ -1,0 +1,5 @@
+# Optional physics profile; project instructions supply policy.
+workbench:
+  schema: 1
+  archetypes: [physics, code]
+  git: normal

@@ -1,0 +1,1 @@
+MESH = "input/box.msh"

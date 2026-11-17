@@ -1,0 +1,18 @@
+# Synthetic profile fixture for parser and guard behavior.
+workbench:
+  schema: 1
+  archetypes: [code, research]
+  activation: null
+  python: ".venv/bin/python"
+  git: read-only
+  user_executed:
+    - {pattern: 'scripts/pipelines/(train|full_pipeline|ablation_matrix)\.py', why: "training is user-owned compute"}
+    - {pattern: 'scripts/eval/eval_(clean|noisy|captions)\.py|compare_captions\.py', why: "evaluation needs data and checkpoints"}
+  agent_allowed:
+    - 'CUDA_VISIBLE_DEVICES="" HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/pytest -q'
+    - '.venv/bin/python scripts/reporting/render_tables.py'
+  authority:
+    results: results/README.md
+    operations: docs/operations.md
+    third_party: THIRD_PARTY.md
+  codex_delegation: print-only

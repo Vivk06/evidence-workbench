@@ -1,0 +1,16 @@
+# Synthetic profile fixture for parser and guard behavior.
+workbench:
+  schema: 1
+  archetypes: [code, research]
+  activation: null
+  python: "PYTHONPATH=src .venv/bin/python"
+  git: none
+  user_executed:
+    - {pattern: 'projects/solver-project/.*(verify\.sh|run/|pytest)', why: "solver-project runs belong to solver-project sessions and the user"}
+    - {pattern: '\b(mpirun|mpiexec|SU2_CFD)\b', why: "no CFD runs here"}
+  read_only_paths: ["~/projects/solver-project"]
+  authority:
+    interface: docs/interface.md
+    roadmap: docs/roadmap.md
+    reading: docs/reading_list.md
+  codex_delegation: print-only

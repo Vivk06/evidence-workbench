@@ -1,0 +1,5 @@
+# Optional research profile; project instructions supply policy.
+workbench:
+  schema: 1
+  archetypes: [research]
+  git: normal

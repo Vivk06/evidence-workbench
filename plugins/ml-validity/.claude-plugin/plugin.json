@@ -1,0 +1,19 @@
+{
+  "name": "ml-validity",
+  "version": "1.4.0",
+  "description": "ML validity: experiment leakage and splits, results provenance, third-party code and multi-fidelity data audits",
+  "author": {
+    "name": "Vivk06"
+  },
+  "repository": "https://github.com/Vivk06/evidence-workbench",
+  "license": "MIT",
+  "keywords": [
+    "machine-learning",
+    "provenance",
+    "reproducibility"
+  ],
+  "defaultEnabled": false,
+  "dependencies": [
+    "workbench-core"
+  ]
+}

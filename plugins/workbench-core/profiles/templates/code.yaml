@@ -1,0 +1,5 @@
+# Optional code profile; project instructions supply policy.
+workbench:
+  schema: 1
+  archetypes: [code]
+  git: normal

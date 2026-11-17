@@ -1,0 +1,37 @@
+{
+  "name": "evidence-workbench",
+  "description": "Evidence-based audits and workflows for scientific software, machine learning and research",
+  "owner": {
+    "name": "Vivk06"
+  },
+  "plugins": [
+    {
+      "name": "workbench-core",
+      "source": "./plugins/workbench-core",
+      "description": "Workflow core for any repository: planning, phase execution, minimal edits, handoffs, test and repository audits, decision records, repo setup and the profile guard"
+    },
+    {
+      "name": "sim-validity",
+      "source": "./plugins/sim-validity",
+      "description": "Simulation validity: run verdicts, solution and code verification, conservation, solver health, validation, mesh admission and derivative audits"
+    },
+    {
+      "name": "ml-validity",
+      "source": "./plugins/ml-validity",
+      "description": "ML validity: experiment leakage and splits, results provenance, third-party code and multi-fidelity data audits"
+    },
+    {
+      "name": "research-writing",
+      "source": "./plugins/research-writing",
+      "description": "Research and writing: readable documents from agent notes, plain-language checks, evidence maps, claims ledger, LaTeX checks, analysis notes, documentation context, stop-slop and routing to research-papers"
+    },
+    {
+      "name": "workbench",
+      "source": "./plugins/workbench",
+      "description": "Install-only bundle: installs workbench-core, sim-validity, ml-validity and research-writing; each repository enables the ones it needs"
+    }
+  ],
+  "renames": {
+    "cfd-plugin": "workbench"
+  }
+}

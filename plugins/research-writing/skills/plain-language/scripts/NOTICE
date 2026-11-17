@@ -1,0 +1,36 @@
+Plain-language checker (check.py, prose.py, rules.json)
+Copyright 2026 Lindsay Holmwood
+
+Adapted from https://github.com/auxesis/plain-language-skill at revision
+536a1d3a, licensed under the Apache License 2.0 (LICENSE in this folder).
+
+Changes made by the evidence-workbench marketplace:
+- check.py: the house-style rules "comma-after-opening-clause" and "serial-comma"
+  are removed; "thing-given-person-verb" and "two-ideas-in-one-sentence" are
+  advice, not must-fix; each undefined abbreviation is reported on its own, not once
+  per sentence; the report and the JSON output carry a PASS or FAIL verdict.
+- rules.json: the house-style rules "month-abbreviation", "negative-contraction" and
+  "date-format" are removed; "latin-abbreviation" and "govuk-words-to-avoid" are
+  advice; Australian state abbreviations are no longer known abbreviations, and
+  PASS, FAIL, MIT, BSD, DOI and UTF are; the header comment describes this checker.
+- prose.py is unchanged.
+- The upstream hooks, skill text and reference files are not included.
+
+The upstream NOTICE reads:
+
+  This product contains material adapted from the UK government's content
+  guidance. The sources are:
+
+  - the GOV.UK content guidance, as copied in the folder
+    data/context/content-guidance/ of https://github.com/DEFRA/ai-uc-rpa-guidance
+    (Copyright (c) 2023 Defra);
+  - the "Words to avoid" section of the GOV.UK A to Z style guide, at
+    https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/style-guides/a-to-z-style-guide/#words-to-avoid
+
+  Contains public sector information licensed under the Open Government
+  Licence v3.0:
+  https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+
+In this folder that material is in the rules "govuk-words-to-avoid" and
+"govuk-tone" in rules.json. It stays under the Open Government Licence v3.0, not
+the Apache License 2.0.

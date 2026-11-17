@@ -1,0 +1,1 @@
+{"session_id": "abc123", "transcript_path": "/home/user/.claude/projects/x/transcript.jsonl", "cwd": "REPLACED", "permission_mode": "auto", "hook_event_name": "PreToolUse", "tool_name": "Edit", "tool_input": {"file_path": "REPLACED", "old_string": "a", "new_string": "b", "replace_all": false}, "tool_use_id": "toolu_01ABC124"}

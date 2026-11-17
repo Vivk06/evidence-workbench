@@ -1,0 +1,1 @@
+{"cold_start":false,"independent_adjoint":true,"config_parity":true,"provenance":"solver_manifest.json","rows":[{"name":"alpha","relative_error":0.01,"band":0.0001,"projection_terms":false},{"name":"chordwise_0","tangential":true,"relative_error":0.0,"band":0.001}]}

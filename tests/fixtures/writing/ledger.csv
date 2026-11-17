@@ -1,0 +1,3 @@
+id,claim,source_url,access_date,status,used_in
+L1,"Peak memory was 41 GB of 64 GB on the fine mesh",logs/memory.txt:3,2026-10-26,verified,solver-choice.md:14
+L2,"ILU(0) fails on the fine mesh",https://example.org/forum/123,2026-10-26,contradicted,

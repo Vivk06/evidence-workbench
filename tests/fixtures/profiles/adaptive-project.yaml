@@ -1,0 +1,27 @@
+# Synthetic profile fixture for parser and guard behavior.
+workbench:
+  schema: 1
+  archetypes: [physics, code, research]
+  activation: "source activate.sh"
+  git: read-only
+  commit_message: "logs/commit_<topic>.txt"
+  patches: "logs/patches/NN_<topic>.patch"
+  main_agent_edits_code: false
+  user_executed:
+    - {pattern: '\brun/config(Case|Cylinder|Adaptive)?\.py\b', why: "adaptation runs are user-executed (project policy)"}
+    - {pattern: '\btests\.tools\.(bench|populate_baseline)\b', why: "benchmarks and baselines are user-executed"}
+    - {pattern: '\bsetup_environment\.sh\b', why: "environment install is user-executed"}
+  agent_allowed:
+    - 'python -m unittest'
+    - 'python -m tests.tools.mesh_hash'
+    - 'python -m tests.tools.tier_b_check'
+    - 'graphify'
+    - {pattern: 'run/configAdaptive\.py .*--threads 4', when: "scratch copy only, small fixture case"}
+  authority:
+    anti_patterns: {path: docs/reference/anti_patterns.md, id: "A-xx"}
+    decisions: {path: docs/decisions/, style: current-decision}
+    gates: docs/reference/gate_methodology.md
+    status: docs/results/project_status.md
+    roadmap: docs/plans/roadmap.md
+  code_graph: graphify
+  codex_delegation: print-only

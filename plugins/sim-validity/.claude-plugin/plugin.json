@@ -1,0 +1,21 @@
+{
+  "name": "sim-validity",
+  "version": "1.4.0",
+  "description": "Simulation validity: run verdicts, solution and code verification, conservation, solver health, validation, mesh admission and derivative audits",
+  "author": {
+    "name": "Vivk06"
+  },
+  "repository": "https://github.com/Vivk06/evidence-workbench",
+  "license": "MIT",
+  "keywords": [
+    "simulation",
+    "verification",
+    "cfd",
+    "mesh",
+    "adjoint"
+  ],
+  "defaultEnabled": false,
+  "dependencies": [
+    "workbench-core"
+  ]
+}

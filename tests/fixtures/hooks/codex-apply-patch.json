@@ -1,0 +1,1 @@
+{"session_id": "019a-codex", "turn_id": "t1", "transcript_path": null, "cwd": "REPLACED", "hook_event_name": "PreToolUse", "model": "gpt-6-sol", "permission_mode": "default", "tool_name": "apply_patch", "tool_use_id": "call_2", "tool_input": {"command": "REPLACED"}}

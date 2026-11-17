@@ -1,0 +1,16 @@
+{
+  "name": "workbench-core",
+  "version": "1.4.0",
+  "description": "Workflow core for any repository: planning, phase execution, minimal edits, handoffs, test and repository audits, decision records, repo setup and the profile guard",
+  "author": {
+    "name": "Vivk06"
+  },
+  "repository": "https://github.com/Vivk06/evidence-workbench",
+  "license": "MIT",
+  "keywords": [
+    "planning",
+    "phase-execution",
+    "surgical-edit",
+    "evidence"
+  ]
+}

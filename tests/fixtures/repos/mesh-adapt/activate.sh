@@ -1,0 +1,1 @@
+export NUMBA_THREADING_LAYER=tbb

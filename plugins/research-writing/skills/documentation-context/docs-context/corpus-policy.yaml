@@ -1,0 +1,7 @@
+schema_version: 1
+personal_data: deny
+allowlisted_requires_explicit_paths: true
+redact_secrets: true
+excluded_names: [.git, .venv, node_modules, .secrets, credentials, transcripts, caches, papers]
+write_requires_explicit_output: true
+default_output: terminal

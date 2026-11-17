@@ -1,0 +1,368 @@
+schema_version: 2
+scope: External plugins, MCP servers, skills and CLIs considered for the evidence-workbench marketplace
+status: current 2026-11-17
+research_record: Historical review retained in the private archive; recorded sources and revisions appear below
+extraction_record: Bundled material records its source revision and license in local notices
+archetypes: [physics, code, research]
+decisions: [dependency, bundle, recommend, borrow, reject]
+default: reject
+rules:
+  archetype_scoped: "Admit a tool only for the archetypes (physics, code, research) whose work it directly serves. A recommendation names its archetypes; repo-setup proposes it only for repositories with a matching profile."
+  free_only: "Admit only tools whose useful operation is free: open source and local, or a free API with no paid tier or metered vendor quota gating normal use."
+  default_reject: "Anything not listed here with a non-reject decision is rejected."
+  no_metered_usage: "Reject any tool or feature that spends metered usage, needs a paid tier, or depends on a rate-limited or capped quota tied to the user's accounts (model calls beyond the agent already running, vendor APIs with usage caps, CI minutes); no exceptions."
+  no_redistribution_without_license: "Bundle or copy files only from a tool with a license that allows it; otherwise install it from upstream or reject it."
+  user_executed_installs: "Installing, enabling, logging in or authorizing any tool is a user-executed action; the agent prints the command."
+  project_permissions: "Tools follow project permissions. Writes outside the requested project need explicit authorization."
+evidence_required: [source URL, exact revision or version, license from the repository's own license file, cost model, what it adds over existing skills, always-on token cost, hooks MCP network and credential exposure, project permissions and data boundaries, Codex availability, decision and reason]
+tools:
+  research-papers:
+    decision: recommend
+    archetypes: [research]
+    source: https://github.com/ctoth/research-papers-plugin
+    revision: fa13501acba09b06652055a0a0e7415c69ec4e07
+    pin: tag v4.8.1 (0c41336b9a5f3e44dcf9f986daa6ffea33a4b413) via marketplace ref
+    license: none found
+    reason: Optional paper-processing integration, installed separately on request. No license file was found in the recorded review, so no upstream files are copied.
+    restrictions: [No paper download or collection mutation in preview mode]
+  stop-slop:
+    decision: bundle
+    archetypes: [research]
+    source: https://github.com/hardikpandya/stop-slop
+    revision: 8da1f030185bdfe8471220585162991eaeb970e9
+    license: MIT
+    reason: Bundled in research-writing with LICENSE and attribution.
+  notebooklm-mcp-cli:
+    decision: reject
+    source: https://github.com/jacob-bd/notebooklm-mcp-cli
+    revision: 458d08660b283cf5a264cd361f5025cd05496c1d
+    license: MIT
+    reason: Google-side usage window and weekly cap are a rate-limited quota.
+  notebooklm-mcp-pleaseprompto:
+    decision: reject
+    source: https://github.com/PleasePrompto/notebooklm-mcp
+    revision: 00179986ff6db0f06d305124db7b81ab461066d1
+    license: MIT
+    reason: Archived and unmaintained since September 2026.
+  notebooklm-mcp-alfredang:
+    decision: reject
+    source: https://github.com/alfredang/notebooklm-mcp
+    revision: 860a65232a10d9ca122b13c2c7df95d407fe03b5
+    license: none found (README claims MIT)
+    reason: No license file, inactive since January 2026; nlm covers the need.
+  notebooklm-mcp-secure:
+    decision: reject
+    source: https://github.com/Pantheon-Security/notebooklm-mcp-secure
+    revision: 100000b61382a7b0bb5b908d866f15e3ddb48fa6
+    license: MIT
+    reason: Fork of an archived project with unverified hardening claims; nlm covers the need.
+  zotero-mcp:
+    decision: recommend
+    archetypes: [research]
+    source: https://github.com/54yyyu/zotero-mcp
+    revision: eb016b1b746d183d19ba746249262cd0395f926c
+    license: MIT
+    pin: zotero-mcp-server==0.15.1 (uv tool install)
+    reason: Local-mode library search with local embeddings; no write authorization. Package zotero-mcp-server 0.15.1 (PyPI license MIT AND AGPL-3.0-or-later); install commands in the README.
+  arxiv-mcp-server:
+    decision: reject
+    source: https://github.com/blazickjp/arxiv-mcp-server
+    revision: 572e301bb3198962c025d5ed5e14becb86868daa
+    license: Apache-2.0
+    reason: Duplicates research-papers arXiv search and retrieval and keeps a second paper store outside the repository.
+  markitdown-mcp:
+    decision: recommend
+    archetypes: [research]
+    source: https://github.com/microsoft/markitdown
+    revision: 7482c092d9c0074a89803c9fdb63a969e7fe17fc
+    license: MIT
+    pin: markitdown-mcp==0.0.1a8 (uv tool install)
+    reason: Local document-to-Markdown conversion with one tool; stdio or localhost only.
+  serena:
+    decision: recommend
+    archetypes: [code]
+    source: https://github.com/oraios/serena
+    revision: abb0a0f01b94bc8050086f0fb860077d17730324
+    license: GPL-3.0-or-later (application), MIT (SolidLSP)
+    pin: serena-agent==2.1.0 (uv tool install -p 3.13)
+    reason: Trial against graphify, pinned to a release tag and enabled per project; the catalog entry runs unpinned main.
+  pyright-lsp:
+    decision: recommend
+    archetypes: [code]
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    pin: pyright==1.1.414 (uv tool install) for the pyright-langserver program
+    reason: Zero always-on tokens; check diagnostic noise on SU2_MDO before enabling there. Claude only.
+  clangd-lsp:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/clangd-lsp
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: The only C repository uses the Basilisk qcc dialect, which clangd does not parse.
+  duckdb-skills:
+    decision: reject
+    source: https://github.com/duckdb/duckdb-skills
+    revision: 7feda8e01e22bc0886c86123f3884947e36d8c69
+    license: MIT
+    reason: Not set up for now by the recorded tool review; revisit on request. It would add about 1,000 always-on tokens, a skill that installs software and a skill that reads session transcripts.
+  openalex:
+    decision: reject
+    source: https://github.com/abhijain864/openalex-mcp
+    revision: 09c30d0d9e82fa23d57b2ec85d264aa6bb3381de
+    license: MIT
+    reason: The OpenAlex API is rate-limited; no skill depends on it.
+  paper-search-mcp:
+    decision: reject
+    source: https://github.com/openags/paper-search-mcp
+    revision: cab1b5cc276a0cd004a0044003926a6440088049
+    license: MIT
+    reason: research-papers already queries Crossref, Unpaywall and Semantic Scholar.
+  latex-tooling:
+    decision: borrow
+    archetypes: [research]
+    source: https://github.com/ghostiee-11/overleaf-mcp
+    revision: 6132f6e7fd8bac635e73fce8975f6ea033ebd41f
+    license: MIT
+    reason: The latex-check skill prints the latexmk command for the user and parses the log afterwards; no MCP server.
+  pandoc:
+    decision: recommend
+    archetypes: [research]
+    source: https://github.com/jgm/pandoc
+    revision: a5af15c2d5fb4216e13780db5e7e52477dfaddc3
+    license: GPL-2.0-or-later
+    reason: Local document conversion for application documents.
+  mcp-server-fetch:
+    decision: reject
+    source: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
+    revision: ef9808f71090d0db3eda99e2af2ba78f1086f4fb
+    license: MIT (Apache-2.0 transition in progress)
+    reason: Duplicates the built-in WebFetch tool in Claude Code.
+  playwright-mcp:
+    decision: recommend
+    archetypes: [research]
+    source: https://github.com/microsoft/playwright-mcp
+    revision: 0c4107acbecb75472b23c05c0e42471a0011874f
+    license: Apache-2.0
+    pin: @playwright/mcp@0.0.83 (npx)
+    reason: On demand only for JavaScript-rendered pages, pinned to a version; not enabled by default.
+  github-mcp-server:
+    decision: reject
+    source: https://github.com/github/github-mcp-server
+    revision: f38526264abb14961b32cea386e38ec6d3cf674f
+    license: MIT
+    reason: Needs a personal access token in agent context; write tools conflict with R2; gh read commands suffice.
+  claude-md-management:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Built around CLAUDE.md, which D7 keeps out of target repositories.
+  claude-code-setup:
+    decision: borrow
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Detection ideas for repo-setup only.
+  session-report:
+    decision: recommend
+    archetypes: [physics, code, research]
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/session-report
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Optional; measures always-on token cost.
+  claude-plugins-official-generic:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    components: [pr-review-toolkit, security-guidance, claude-security, feature-dev]
+    reason: Generic development tooling that duplicates local skills (review of 2026-09-18, extraction_record); review sequencing and adversarial-verification patterns already extracted.
+  hookify:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Overlaps the profile-driven guard hook.
+  code-review:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-review
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Pull-request writes conflict with R2.
+  skill-creator:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Its benchmark and eval loop spends model usage.
+  plugin-dev:
+    decision: recommend
+    archetypes: [code]
+    scope: evidence-workbench development only
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/plugin-dev
+    revision: 58267944f92187b7d6a1c822165c96c81c864806
+    license: Apache-2.0
+    reason: Plugin authoring while developing this repository; about 2,354 always-on tokens, so never in target repositories.
+  graphify:
+    decision: recommend
+    archetypes: [code, physics]
+    source: https://github.com/safishamsi/graphify
+    revision: 92741d162b2094ffc2fed58cfbd8ee823e9da62c
+    license: Apache-2.0
+    reason: Local code graph named by the profile key code_graph; code-only mode; no MCP by default.
+  sympy-mcp:
+    decision: borrow
+    archetypes: [physics]
+    source: https://github.com/sdiehl/sympy-mcp
+    revision: 59ac6f9ae03e6b2eaa31676f45239ed8a5ad3975
+    license: Apache-2.0
+    reason: sim-validity references show local SymPy checks; no server.
+  claude-scientific-skills:
+    decision: borrow
+    archetypes: [physics, code]
+    source: https://github.com/K-Dense-AI/claude-scientific-skills
+    revision: 593377bb048752abb0152deab9fbb1083a6087df
+    license: MIT
+    reason: About 17,800 always-on tokens; adapt single references with attribution only.
+  pyvista-mcp-server:
+    decision: borrow
+    archetypes: [physics]
+    source: https://github.com/pyvista/pyvista-mcp-server
+    revision: 713f04e331b89713510f0bf59ed558f3c672c3cb
+    license: MIT
+    reason: mesh-admission references meshio and PyVista inspection snippets; no server.
+  superpowers:
+    decision: borrow
+    archetypes: [physics, code, research]
+    source: https://github.com/obra/superpowers
+    revision: 2ce8aa15d05bd57213e6f746f953aafb7ded7a8b
+    license: MIT
+    reason: Methods folded into plan-forge, phase-exec and surgical-edit; about 851 always-on tokens plus a SessionStart hook as a dependency.
+  recov:
+    decision: recommend
+    archetypes: [code]
+    source: https://github.com/jirikuncar/recov
+    revision: 9f9af9c
+    license: MIT
+    reason: Free, local coverage-based redundancy check (a test whose coverage other tests already give). It runs the whole suite with coverage contexts, so in repositories with expensive tests that run is user-executed; audit_tests.py covers the static side.
+  pytest-smell:
+    decision: borrow
+    source: https://github.com/maxpacs98/disertation
+    revision: 97db59b
+    license: MIT per PyPI; no license file in the repository
+    reason: Test-smell catalogue borrowed into audit_tests.py detectors; research tool, not installed.
+  beagle-llm-artifacts:
+    decision: borrow
+    source: https://github.com/existential-birds/beagle
+    revision: d1a7489
+    license: Apache-2.0
+    reason: Test criteria for agent-made tests (repeated setup, library testing, mock boundaries) borrowed into the test-value-audit skill.
+  paid-search-and-scraping:
+    decision: reject
+    source: context7, exa, firecrawl, tavily, brightdata, nimble
+    reason: Paid tiers or metered quotas.
+  commit-commands:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/commit-commands
+    reason: Commits and pushes violate R2.
+  ralph-loop:
+    decision: reject
+    source: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-loop
+    reason: Autonomous loops violate R1.
+  jupyter-and-paraview-mcp:
+    decision: reject
+    source: Jupyter MCP, ParaView MCP
+    reason: Not selected by the owner.
+  claude-got-skills:
+    decision: borrow
+    source: https://github.com/claude-got-skills/claude-got-skills
+    revision: 47dcd93ab6dec6c8a6befaaa36dc657757a4be48
+    reason: Reviewed 2026-09-18; five-wave reconnaissance and adversarial-verification method already extracted (extraction_record). Not installed.
+  awesome-claude-plugins:
+    decision: borrow
+    source: https://github.com/composiohq/awesome-claude-plugins
+    revision: e521f7ada8d89abea888e67b93b4dcfbb977041f
+    reason: Reviewed 2026-09-18; baseline-profiling and test-integrity ideas already extracted (extraction_record). Integrations, frontend and publishing components rejected.
+  plain-language-skill:
+    decision: bundle
+    archetypes: [research]
+    source: https://github.com/auxesis/plain-language-skill
+    revision: 536a1d36e77977930931acc270a763e929255d29
+    license: Apache-2.0; GOV.UK word lists under the Open Government Licence v3.0
+    reason: Its standard-library Python checker (ISO 24495-1 and 24495-3, GOV.UK guidance) is adapted into research-writing's plain-language skill with LICENSE and NOTICE. House-style rules removed, two heuristic rules made advice, a PASS/FAIL verdict added.
+    restrictions: [Hooks rejected - the Stop hook re-prompts the model (extra metered turns) and the session and prompt hooks add text to every message; skill text and references rewritten, not copied]
+  minto-pyramid-skill:
+    decision: borrow
+    archetypes: [research]
+    source: https://github.com/millwright-labs/minto-pyramid-skill
+    revision: 49d1f584f5661f4dd47c834f5a7f9f0c4c4279d0
+    license: MIT
+    reason: The gate (no answer-first rewrite of timelines, procedures or tutorials; offer rather than rewrite a user's own draft), buried-answer test, reason audit and invent-nothing rule are restated with attribution in reader-distill references/document-types.md.
+  build-evidence-map:
+    decision: borrow
+    archetypes: [research]
+    source: https://github.com/github/awesome-copilot/tree/main/skills/build-evidence-map
+    revision: b1a00457c0b8794243883f387e7de71e88800e3e
+    license: MIT
+    reason: Node types (position, claim, evidence, unknown) and link types (supports, contradicts, qualifies, missing) used by the evidence-map skill as a Markdown table with a Python checker.
+  doubt:
+    decision: reject
+    source: https://github.com/alsoleg89/doubt
+    revision: 4bd97b12c6f0cac3d45ff69bf41bfa3189465c8e
+    license: MIT
+    reason: The renderer and source verifier need an npm install and network access; evidence-map's local checker and the claims ledger cover the need.
+  diataxis:
+    decision: borrow
+    archetypes: [research]
+    source: https://diataxis.fr (reviewed through https://github.com/oxidecomputer/claude-plugins at 7bd491a34a4b5cd4ac4d5ad8a36afeb77a37c64e)
+    license: CC-BY-SA-4.0 upstream; the Oxide repository has no license file
+    reason: The four document types and the two-question compass are restated in reader-distill's own words with a citation; no text copied, because share-alike would carry over.
+  doc-coauthoring:
+    decision: borrow
+    archetypes: [research]
+    source: https://github.com/anthropics/skills/tree/main/skills/doc-coauthoring
+    revision: dbd4588f9e1033efb41dad4bef2f7947c8993d44
+    license: none in the skill folder (repository README says most skills are Apache-2.0)
+    reason: Method only - predict the reader's questions and check the document answers them. The fresh-subagent reader test runs only when the user asks, because it spends model time.
+  claude-scientific-writer:
+    decision: borrow
+    archetypes: [research]
+    source: https://github.com/K-Dense-AI/claude-scientific-writer
+    revision: 529b9f73ab4b48925027145800d7b49e96ccfd3c
+    license: MIT
+    reason: Outline before prose, and drafting kept apart from evidence checking, folded into reader-distill. The skill itself (about 718 lines) is too large to install.
+  ste-writing-skills:
+    decision: borrow
+    archetypes: [research]
+    source: https://github.com/zerg-su/ste-writing-skills
+    revision: 9d111eebe67a393ebb3a569a4568b8879692c562
+    license: MIT
+    reason: "Expected:" and "If not:" lines for procedure steps, and marking unsourced facts, used in reader-distill's how-to guide type.
+  vale:
+    decision: recommend
+    archetypes: [research]
+    source: https://github.com/errata-ai/vale (MCP wrapper https://github.com/theletterf/vale-mcp-server at 91011728caa24de04c5568a451176166d96b5447)
+    license: MIT
+    reason: Free local prose linter; recommend only in repositories that already keep a .vale.ini. Use the vale command directly - no MCP server is needed, and theletterf/vale-mcp-server has moved to ChrisChinchilla/Vale-MCP and is not published to npm. vale-cli/agent-tools rejected - its CMS calls return 401 without a paid subscription.
+  readability-claude:
+    decision: reject
+    source: https://github.com/alesdrobysh/readability-claude
+    revision: f2715845fe67d6e7676d276de993ddc2b25ffad6
+    license: MIT
+    reason: Flesch-style scores are a weak guide for technical text and the plugin needs Node.js; the plain-language checker measures sentence and paragraph length directly. textstat (MIT, https://github.com/textstat/textstat at 5679e7ccc0c2627bca1c0506eae1a7feb802a163) rejected for the same reason.
+  humanizer:
+    decision: reject
+    source: https://github.com/blader/humanizer
+    revision: 8c307f367c91bd974002f10f2be2965d642c13df
+    license: MIT
+    reason: Duplicates the bundled stop-slop skill.
+  other-plain-language-skills:
+    decision: reject
+    source: b1rdmania/claude-plain-english-skill 1e1501e0, nikdumroese/plain-language-skill 6d6a69d9, AminBlg/SimpleEnglish a6fcb4fd, patrick204nqh/skills f5775e0e (bluf, minto-pyramid)
+    license: MIT
+    reason: Each is covered more completely by plain-language-skill or minto-pyramid-skill.
+  diataxis-doc-skills:
+    decision: reject
+    source: pkloehn1/techdocs-authoring 6ff50be5, joaquimscosta/arkhe-claude-plugins 8e1be1b8
+    license: MIT
+    reason: Overlap the Diataxis borrow; reviewed from their READMEs and skill descriptions only.

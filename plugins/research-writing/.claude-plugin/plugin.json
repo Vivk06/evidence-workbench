@@ -1,0 +1,20 @@
+{
+  "name": "research-writing",
+  "version": "1.4.0",
+  "description": "Research and writing: readable documents from agent notes, plain-language checks, evidence maps, claims ledger, LaTeX checks, analysis notes, documentation context, stop-slop and routing to research-papers",
+  "author": {
+    "name": "Vivk06"
+  },
+  "repository": "https://github.com/Vivk06/evidence-workbench",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "writing",
+    "citations",
+    "papers"
+  ],
+  "defaultEnabled": false,
+  "dependencies": [
+    "workbench-core"
+  ]
+}

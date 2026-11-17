@@ -1,0 +1,12 @@
+# Synthetic profile fixture for parser and guard behavior.
+workbench:
+  schema: 1
+  archetypes: [research]
+  activation: null
+  git: none
+  claims_ledger: "universities/<Name>/research/**/claims-ledger.csv"
+  authority:
+    profile: research-interests.md
+    universities: universities/README.md
+  writing: {style: stop-slop, voice: first-person, latex: sop-tex/}
+  codex_delegation: print-only

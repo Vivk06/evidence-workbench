@@ -1,0 +1,20 @@
+{
+  "name": "workbench",
+  "version": "1.4.0",
+  "description": "Install-only bundle: installs workbench-core, sim-validity, ml-validity and research-writing; each repository enables the ones it needs",
+  "author": {
+    "name": "Vivk06"
+  },
+  "repository": "https://github.com/Vivk06/evidence-workbench",
+  "license": "MIT",
+  "keywords": [
+    "bundle"
+  ],
+  "defaultEnabled": false,
+  "dependencies": [
+    "workbench-core",
+    "sim-validity",
+    "ml-validity",
+    "research-writing"
+  ]
+}

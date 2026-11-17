@@ -1,0 +1,30 @@
+# Synthetic profile fixture for parser and guard behavior.
+workbench:
+  schema: 1
+  archetypes: [physics, code, research]
+  activation: "source activate.sh"
+  git: read-only
+  commit_message: "logs/commit_<topic>.txt"
+  patches: "logs/patches/NN_<topic>.patch"
+  user_executed:
+    - {pattern: '(^|[;&|]\s*)(mpirun|mpiexec)\b', why: "MPI runs are user-executed"}
+    - {pattern: '\b(SU2_CFD|SU2_DEF|SU2_DOT|SU2_SOL)\b', why: "SU2 solver runs are user-executed"}
+    - {pattern: '(^|\s)(python[0-9.]*\s+-m\s+)?pytest\b', why: "a bare pytest starts real SU2 solves; use bash verify.sh --lane fast"}
+    - {pattern: '\bverify\.sh\b.*--lane\s+(parallel|solver|study|all)\b', why: "slow lanes are user-executed"}
+    - {pattern: '\brun/(optimize|mesh)\.py\b', why: "optimizer and mesh runs are user-executed"}
+    - {pattern: '\bsetup\.sh\b', why: "ask before environment builds"}
+  agent_allowed:
+    - 'bash verify.sh --lane fast'
+    - 'python tools/compare_revisions.py'
+  frozen_paths:
+    - src/simopt/solver/aero_comp.py
+    - src/simopt/solver/builder.py
+    - src/simopt/solver/standalone/
+    - docs/reference/solver_api.md
+  run_handoff: {prefix: "$(bash tools/bind_cores.sh <np>)", output: "cases/<case>/output/<run_id>/", tee: false}
+  authority:
+    anti_patterns: {path: docs/reference/anti_patterns.md, id: "AP-N"}
+    decisions: {path: docs/decisions/, style: append-only}
+    status: docs/results/project_status.md
+    roadmap: docs/plans/roadmap.md
+  codex_delegation: print-only

@@ -1,0 +1,7 @@
+schema_version: 1
+mode: corpus
+output: lean
+sources: []
+max_tokens: 1200
+personal_data: deny
+privacy: explicit-scope-only

@@ -1,0 +1,16 @@
+# Command classes and data-retention rules that every skill and hook follows.
+# Skills state their class as "Command class: `<name>`"; tests/test_skill_contracts.py checks it.
+schema_version: 1
+command_classes:
+  read-only: inspect state; no writes
+  safe-local: bounded local validation or dry-run; no expensive work
+  user-execution: expensive, external, solver, MPI, install, publish, or user-state action
+retention:
+  source: retain in originating repository; never copy into a plugin
+  evidence: retain in explicit run/archive locations with provenance
+  papers: opt-in source-scoped; never bundle by default
+  transcripts: never copy into the workbench
+  databases: never copy into the workbench
+  graphify_output: retain only when explicitly requested and source-scoped
+  generated_caches: disposable only when explicitly identified; never traverse implicitly
+  orphan_bridge_metadata: retain for audit, quarantine if unreferenced; never silently delete

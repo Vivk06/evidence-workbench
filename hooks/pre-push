@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Local gate instead of CI (D34): every free check runs before a push.
+# Enable once per clone: git config core.hooksPath hooks
+set -euo pipefail
+exec bash "$(git rev-parse --show-toplevel)/scripts/check.sh"
